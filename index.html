@@ -4,17 +4,84 @@
     <meta charset="utf-8">
     <title>My first three.js app</title>
     <style>
-      body { margin: 0; }
+      body { 
+        margin: 0; 
+        font-family: Arial, sans-serif; 
+        background: none; /* Ensure no background rendering */
+      }
+      nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      /* Stile per la tabella con bordo dinamico */
+      .dynamic-table {
+        width: 80%; /* Ridotta la larghezza della tabella */
+        margin: 20px auto 0; /* Aggiunto margine superiore di 20px */
+        border-collapse: collapse;
+        border-radius: 15px; /* Bordi arrotondati */
+        overflow: hidden; /* Per applicare i bordi arrotondati */
+        border: 3px solid black; /* Bordo nero con spessore 3px */
+        box-shadow: 0 0 0 1px black; /* Forza la visibilità del bordo */
+      }
+      .dynamic-table td {
+        padding: 10px;
+        text-align: center; /* Centra il contenuto delle celle */
+        vertical-align: top; /* Allinea verticalmente */
+      }
+      .dynamic-table img {
+        display: block; /* Trasforma l'immagine in un elemento a blocco */
+        margin: 0 auto; /* Centra l'immagine */
+        width: 150px;
+        height: 150px;
+        border-radius: 15px; /* Bordi arrotondati per le immagini */
+      }
     </style>
   </head>
   <body>
+    <!-- Barra di navigazione -->
+    <nav>
+      <div class="logo">Starlink 2023</div>
+      <div class="menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
     
-    <!-- Importazione di Three.js da CDN -->
-    <script type="module">
-      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.131.3/build/three.module.js';
-    </script>
-
-    <!-- Il tuo script principale -->
-    <script type="module" src="main.js"></script>
+    <!-- Tabella con immagini cliccabili e bordo dinamico -->
+    <table class="dynamic-table" style="--image-count: 3;">
+      <tr>
+        <td>
+          <div>Mobile 1</div>
+          <a href="viewer.html?file=public/img1.glb" target="_blank">
+            <img src="img/img1.jpg" alt="Image 1">
+          </a>
+        </td>
+        <td>
+          <div>Mobile 2</div>
+          <a href="viewer.html?file=public/img1.glb" target="_blank">
+            <img src="img/img2.jpg" alt="Image 2">
+          </a>
+        </td>
+        <td>
+          <div>Mobile 3</div>
+          <a href="viewer.html?file=public/img1.glb" target="_blank">
+            <img src="img/img3.jpg" alt="Image 3">
+          </a>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

@@ -2,6 +2,46 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
+// Funzione per ottenere il parametro dalla query string
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Ottieni il nome del file dalla query string
+const fileName = getQueryParam('file');
+
+// Carica il modello 3D in base al parametro 'file' nella query string
+if (fileName) {
+  const loader = new GLTFLoader();
+  loader.load(
+      fileName, // Percorso dinamico del modello
+      (gltf) => {
+          model = gltf.scene;
+
+          // Abilita ombre per il modello
+          model.traverse((child) => {
+              if (child.isMesh) {
+                  child.castShadow = true;
+                  child.receiveShadow = true;
+              }
+          });
+
+          model.scale.set(2, 2, 2);
+          model.position.set(0, 0, 0);
+          scene.add(model);
+      },
+      (xhr) => {
+          console.log((xhr.loaded / xhr.total * 100) + '% caricato');
+      },
+      (error) => {
+          console.error('Errore nel caricamento del modello:', error);
+      }
+  );
+} else {
+  console.error('Nessun file specificato nella query string.');
+}
+
 // Attiva la fotocamera del PC e usa il feed video come sfondo
 navigator.mediaDevices.getUserMedia({ video: true })
     .then((stream) => {
@@ -59,7 +99,7 @@ let controlMode = 'camera'; // 'camera' o 'model'
 // Crea un menu HTML
 const menu = document.createElement('div');
 menu.style.position = 'absolute';
-menu.style.top = '10px';
+menu.style.top = '50px'; // Abbassato ulteriormente di 20px
 menu.style.left = '10px';
 menu.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
 menu.style.padding = '10px';
