@@ -115,33 +115,6 @@ scaleInput.addEventListener('input', (event) => {
     }
 });
 
-// Carica il modello 3D
-const loader = new GLTFLoader();
-loader.load(
-    './public/mo.glb', // Percorso del modello
-    (gltf) => {
-        model = gltf.scene;
-
-        // Abilita ombre per il modello
-        model.traverse((child) => {
-            if (child.isMesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-            }
-        });
-
-        model.scale.set(2, 2, 2);
-        model.position.set(0, 0, 0);
-        scene.add(model);
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% caricato');
-    },
-    (error) => {
-        console.error('Errore nel caricamento del modello:', error);
-    }
-);
-
 // Aggiungi controlli per il mouse
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
